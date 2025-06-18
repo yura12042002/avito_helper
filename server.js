@@ -11,7 +11,7 @@ const TELEGRAM_CHAT_IDS = process.env.TELEGRAM_CHAT_IDS.split(",").map((id) =>
 
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const bot = new TelegramBot(TOKEN);
-const cookies = JSON.parse(fs.readFileSync("cookies.json", "utf-8"));
+const cookies = JSON.parse(fs.readFileSync(process.env.COOKIE_FILE_NAME, "utf-8"));
 
 const LAST_TEXT_PATH = "last_message.txt";
 let previousText = fs.existsSync(LAST_TEXT_PATH)
