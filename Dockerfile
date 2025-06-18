@@ -1,6 +1,6 @@
 FROM node:20
 
-# Установка зависимостей, нужных для запуска Puppeteer/Chrome
+# Установка зависимостей, необходимых для headless Chrome
 RUN apt-get update && apt-get install -y \
     wget \
     ca-certificates \
@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
     libvulkan1 \
     libxss1 \
     libgtk-3-0 \
+    libgbm1 \
     --no-install-recommends && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -36,8 +37,8 @@ RUN npm install
 # Копирование остального проекта
 COPY . .
 
-# Открываем порт
+# Открытие порта (если нужно)
 EXPOSE 3000
 
-# Запуск приложения
+# Запуск
 CMD ["npm", "start"]
