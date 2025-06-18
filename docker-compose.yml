@@ -6,4 +6,4 @@ services:
     env_file:
       - .env
     volumes:
-      - /root/cookies:/usr/src/app
+      - /root/cookies:/usr/src/app/cookies
