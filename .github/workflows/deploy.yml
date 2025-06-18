@@ -24,9 +24,9 @@ jobs:
 
             echo "Creating .env file..."
             echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN1 }}" > .env
-            echo "TELEGRAM_CHAT_IDS=${{ secrets.TELEGRAM_CHAT_IDS1 }}" > .env
-            echo "ACCOUNT_OWNER=${{ secrets.ACCOUNT_OWNER1 }}" > .env
-            echo "COOKIE_FILE_NAME=${{ secrets.COOKIE_FILE_NAME1 }}" > .env
+            echo "TELEGRAM_CHAT_IDS=${{ secrets.TELEGRAM_CHAT_IDS1 }}" >> .env
+            echo "ACCOUNT_OWNER=${{ secrets.ACCOUNT_OWNER1 }}" >> .env
+            echo "COOKIE_FILE_NAME=${{ secrets.COOKIE_FILE_NAME1 }}" >> .env
 
             echo "Stopping old containers..."
             docker compose down
@@ -52,9 +52,9 @@ jobs:
 
             echo "Creating .env file..."
             echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN2 }}" > .env
-            echo "TELEGRAM_CHAT_IDS=${{ secrets.TELEGRAM_CHAT_IDS2 }}" > .env
-            echo "ACCOUNT_OWNER=${{ secrets.ACCOUNT_OWNER2 }}" > .env
-            echo "COOKIE_FILE_NAME=${{ secrets.COOKIE_FILE_NAME2 }}" > .env
+            echo "TELEGRAM_CHAT_IDS=${{ secrets.TELEGRAM_CHAT_IDS2 }}" >> .env
+            echo "ACCOUNT_OWNER=${{ secrets.ACCOUNT_OWNER2 }}" >> .env
+            echo "COOKIE_FILE_NAME=${{ secrets.COOKIE_FILE_NAME2 }}" >> .env
 
             echo "Stopping old containers..."
             docker compose down

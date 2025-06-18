@@ -5,7 +5,7 @@ const { createWorker } = require("tesseract.js");
 const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
 
-const TELEGRAM_CHAT_IDS = process.env.TELEGRAM_CHAT_IDS.split(",").map((id) =>
+const TELEGRAM_CHAT_IDS = String(process.env.TELEGRAM_CHAT_IDS).split(",").map((id) =>
   id.trim()
 );
 
