@@ -18,9 +18,9 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             echo "Cloning latest repo..."
-            rm -rf appdir
-            git clone --single-branch --branch main https://github.com/${{ github.repository }}.git appdir
-            cd appdir/back
+            rm -rf avito_bot1
+            git clone --single-branch --branch main https://github.com/${{ github.repository }}.git avito_bot1
+            cd avito_bot1
 
             echo "Creating .env file..."
             echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN1 }}" > .env
@@ -46,9 +46,9 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             echo "Cloning latest repo..."
-            rm -rf appdir
-            git clone --single-branch --branch main https://github.com/${{ github.repository }}.git appdir
-            cd appdir/back
+            rm -rf avito_bot2
+            git clone --single-branch --branch main https://github.com/${{ github.repository }}.git avito_bot2
+            cd avito_bot2
 
             echo "Creating .env file..."
             echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN2 }}" > .env
