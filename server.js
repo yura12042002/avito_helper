@@ -1,5 +1,4 @@
 const fs = require("fs");
-const path = require("path");
 const puppeteer = require("puppeteer");
 const { createWorker } = require("tesseract.js");
 const TelegramBot = require("node-telegram-bot-api");
@@ -28,7 +27,7 @@ async function checkAvitoMessages() {
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
-      "--proxy-server=socks5://84.17.27.253:9105",
+      "--proxy-server=socks5://127.0.0.1:1080", // 👈 Используем локальный защищённый прокси
     ],
   });
 
@@ -38,8 +37,15 @@ async function checkAvitoMessages() {
     await page.setViewport({ width: 1280, height: 800 });
     await page.setCookie(...cookies);
 
+    // Проверка IP
+    await page.goto("https://api.myip.com", { waitUntil: "networkidle2" });
+    const ipText = await page.evaluate(() => document.body.innerText);
+    console.log("🧠 IP в браузере:", ipText);
+
+    // Загрузка страницы Авито
     await page.goto("https://www.avito.ru/profile/messenger", {
       waitUntil: "networkidle2",
+      timeout: 60000,
     });
 
     const screenshotPath = "avito_messages.png";
@@ -66,9 +72,7 @@ async function checkAvitoMessages() {
     const cleanedText = text.trim().split("\n")[2];
 
     if (cleanedText && cleanedText !== previousText) {
-      console.log("🔔 Обнаружен новый текст:");
-      console.log(cleanedText);
-
+      console.log("🔔 Обнаружен новый текст:\n", cleanedText);
       previousText = cleanedText;
       fs.writeFileSync("last_message.txt", cleanedText);
 
@@ -79,6 +83,8 @@ async function checkAvitoMessages() {
         });
       }
       console.log("✅ Сообщение отправлено в Telegram!");
+    } else {
+      console.log("📭 Новых сообщений нет.");
     }
   } catch (err) {
     console.error("❌ Ошибка:", err.message || err);
