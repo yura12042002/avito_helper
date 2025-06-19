@@ -5,13 +5,15 @@ const { createWorker } = require("tesseract.js");
 const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
 
-const TELEGRAM_CHAT_IDS = String(process.env.TELEGRAM_CHAT_IDS).split(",").map((id) =>
-  id.trim()
-);
+const TELEGRAM_CHAT_IDS = String(process.env.TELEGRAM_CHAT_IDS)
+  .split(",")
+  .map((id) => id.trim());
 
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const bot = new TelegramBot(TOKEN);
-const cookies = JSON.parse(fs.readFileSync(process.env.COOKIE_FILE_NAME, "utf-8"));
+const cookies = JSON.parse(
+  fs.readFileSync(process.env.COOKIE_FILE_NAME, "utf-8")
+);
 
 const LAST_TEXT_PATH = "last_message.txt";
 let previousText = fs.existsSync(LAST_TEXT_PATH)
@@ -21,10 +23,14 @@ let previousText = fs.existsSync(LAST_TEXT_PATH)
 async function checkAvitoMessages() {
   console.log("🕒 Запуск задачи: проверка Авито...");
 
-const browser = await puppeteer.launch({
-  headless: "new",
-  args: ['--no-sandbox', '--disable-setuid-sandbox']
-});
+  const browser = await puppeteer.launch({
+    headless: "new",
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--proxy-server=socks5://84.17.27.253:9105",
+    ],
+  });
 
   const page = await browser.newPage();
 
